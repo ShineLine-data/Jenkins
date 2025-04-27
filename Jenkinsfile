@@ -86,8 +86,8 @@ pipeline {
             steps{
                 dir('cd ..'){
                 sh '''
-                docker-compose build
-                docker-compose up
+                docker compose build
+                docker compose up
                 #docker run --rm -d -p 8081:8081 ${DOCKERHUB_USER}/line-frontend:latest
                 '''
                 }

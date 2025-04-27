@@ -6,6 +6,10 @@ pipeline {
         DOCKERHUB_USER = 'shineline'       // ton nom d’utilisateur Docker Hub
     }
 
+    tools {
+        nodejs 'Node_23'
+    }
+
     stages {
         stage('Checkout') {
             steps {

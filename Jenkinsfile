@@ -14,13 +14,18 @@ pipeline {
             }
         }
 
-        stage('Install Python') {
-            steps {
-                sh 'sudo apt update && apt install -y python3 python3-venv'
-            }
-        }
+        // stage('Install Python') {
+        //     steps {
+        //         sh 'sudo apt update && apt install -y python3 python3-venv'
+        //     }
+        // }
 
         stage('Build & Test Backend (Django)') {
+            agent {
+                docker {
+                    image 'python:3.13-slim'
+                }
+            }
             steps {
                 dir('Backend/odc') {
                     echo "⚙️ Création de l'environnement virtuel et test de Django"

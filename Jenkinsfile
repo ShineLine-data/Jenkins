@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = 'jnk-creds' // ID Jenkins Credentials
-        DOCKERHUB_USER = 'pauljosephd'       // ton nom d’utilisateur Docker Hub
+        DOCKER_HUB_CREDENTIALS = 'dockerhub-cred' // ID Jenkins Credentials
+        DOCKERHUB_USER = 'shineline'       // ton nom d’utilisateur Docker Hub
     }
 
     stages {
@@ -47,10 +47,10 @@ pipeline {
             steps {
                 script {
                     echo "🐳 Construction de l'image Docker Backend"
-                    sh "docker build -t ${DOCKERHUB_USER}/mon-backend:latest -f ./Backend/odc/Dockerfile ./Backend/odc"
+                    sh "docker build -t ${DOCKERHUB_USER}/line-backend:latest -f ./Backend/odc/Dockerfile ./Backend/odc"
 
                     echo "🐳 Construction de l'image Docker Frontend"
-                    sh "docker build -t ${DOCKERHUB_USER}/mon-frontend:latest ./Frontend"
+                    sh "docker build -t ${DOCKERHUB_USER}/line-frontend:latest ./Frontend"
                 }
             }
         }
@@ -61,8 +61,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker push $DOCKER_USER/mon-backend:latest
-                        docker push $DOCKER_USER/mon-frontend:latest
+                        docker push $DOCKER_USER/line-backend:latest
+                        docker push $DOCKER_USER/line-frontend:latest
                     '''
                 }
             }
@@ -73,7 +73,7 @@ pipeline {
                 sh '''
                 docker-compose build
                 docker-compose up
-                #docker run --rm -d -p 8081:8081 ${DOCKERHUB_USER}/mon-frontend:latest
+                #docker run --rm -d -p 8081:8081 ${DOCKERHUB_USER}/line-frontend:latest
                 '''
                 }
             }
@@ -84,7 +84,7 @@ pipeline {
         success {
             mail to: 'doguepauljoseph@gmail.com',
                  subject:"deploiement reussi",
-                  body: "l'application a ete deploye avec succes"
+                  body: "l'application a ete deploye avec succes; Je suis une linda !!!"
         }
         failure {
             mail to: 'doguepauljoseph@gmail.com',
@@ -93,3 +93,4 @@ pipeline {
         }
     }
 }
+mon

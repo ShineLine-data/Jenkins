@@ -16,7 +16,7 @@ pipeline {
 
         stage('Install Python') {
             steps {
-                sh 'apt-get update && apt-get install -y python3 python3-venv'
+                sh 'sudo apt update && apt install -y python3 python3-venv'
             }
         }
 

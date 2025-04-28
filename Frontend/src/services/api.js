@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   // baseURL: 'http://localhost:8000/api', 
-  baseURL: "http://file-rouge-ci-cd-general-backend-1:8000/api/",
+  baseURL: "http://backend:8000/api/",
 
 });
 

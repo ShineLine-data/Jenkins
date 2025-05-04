@@ -96,6 +96,7 @@ pipeline {
 
     post {
         success {
+            echo "Succcccesss"
             mail to: 'doguepauljoseph@gmail.com',
                  subject:"deploiement reussi",
                   body: "l'application a ete deploye avec succes; Je suis une linda !!!"

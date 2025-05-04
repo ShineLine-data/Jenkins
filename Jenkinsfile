@@ -19,13 +19,17 @@ pipeline {
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
                     script {
                         def scannerHome = tool 'LineSonar' // <= Ici on charge SonarScanner installer dans jenkins
-                        sh '''
+
+                        sh """
+                            echo 'Test de l'installation de SonarScanner......'
+                            ls -l ${scannerHome}/bin
+                            echo 'fin du test.....'
                             ${scannerHome}/bin/sonar-scanner \
                                 -Dsonar.projectKey=sonar-project \
                                 -Dsonar.sources=. \
                                 -Dsonar.host.url=http://localhost:9000 \
                                 -Dsonar.login=$SONARQUBE_TOKEN
-                        '''
+                        """
                     }
                     // sh 'sonar-scanner'
                 }
